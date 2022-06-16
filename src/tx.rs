@@ -35,7 +35,6 @@ pub fn print_tx(tx: &Tx) {
     print_tx_data(tx.data.clone());
 }
 
-
 fn print_signed_tx_data(signed: SignedTxData) {
     println!("Signature: {:?}", signed.sig);
     print_tx_data(signed.data);
@@ -49,7 +48,7 @@ fn print_signed(signed: Signed<Vec<u8>>) {
 fn print_tx_data(data: Option<Vec<u8>>) {
     if data.is_none() {
         println!("Data: None");
-        return
+        return;
     }
     let data = data.as_ref().unwrap();
 
@@ -65,8 +64,8 @@ fn print_tx_data(data: Option<Vec<u8>>) {
                     ProtocolTxType::EthereumStateUpdate(tx) => {
                         println!("Tx: (found ProtocolTxType::EthereumStateUpdate");
                         print_tx(&tx);
-                    },
-                    _ => println!("Tx: found ProtocolTxType")
+                    }
+                    _ => println!("Tx: found ProtocolTxType"),
                 }
             }
             _ => println!("Data: found TxType"),
