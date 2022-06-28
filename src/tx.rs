@@ -36,12 +36,12 @@ pub fn print_tx(tx: &Tx) {
 }
 
 fn print_signed_tx_data(signed: SignedTxData) {
-    println!("Signature: {:?}", signed.sig);
+    println!("Signature: {:#?}", signed.sig);
     print_tx_data(signed.data);
 }
 
 fn print_signed(signed: Signed<Vec<u8>>) {
-    println!("Signature: {:?}", signed.sig);
+    println!("Signature: {:#?}", signed.sig);
     println!("Data: {} bytes", signed.data.len());
 }
 
@@ -59,7 +59,7 @@ fn print_tx_data(data: Option<Vec<u8>>) {
         match tx_type {
             TxType::Protocol(protocol_tx) => {
                 println!("Data: (found TxType::Protocol)");
-                println!("Public key: {:?}", protocol_tx.pk);
+                println!("Public key: {:#?}", protocol_tx.pk);
                 match protocol_tx.tx {
                     ProtocolTxType::EthereumStateUpdate(tx) => {
                         println!("Tx: (found ProtocolTxType::EthereumStateUpdate");
