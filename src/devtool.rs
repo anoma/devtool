@@ -1,14 +1,14 @@
 #![allow(unused)]
 
-use anoma::types::key::common::{self, SecretKey};
 use borsh::BorshSerialize;
 use color_eyre::eyre::Result;
 use eyre::{eyre, Context, Report};
+use namada::types::key::common::{self, SecretKey};
 use std::{path::PathBuf, str::FromStr};
 
 // some of these tendermint dependencies may need to be declared as `pub extern` in anoma_apps
 use crate::{args, fs, keys, tendermint, tx};
-use anoma_apps::tendermint_rpc_abci::Client;
+use namada_apps::tendermint_rpc::Client;
 
 fn deserialize_from_files(
     code: PathBuf,
@@ -35,17 +35,6 @@ fn deserialize_from_files(
 
 pub(crate) async fn run(cmd: args::Commands) -> Result<()> {
     match cmd {
-        args::Commands::WriteProtocolTx(args::WriteTx {
-            code,
-            data,
-            out,
-            key,
-        }) => {
-            let (wasm_bytes, data_bytes, key) = deserialize_from_files(code, data, key)?;
-
-            let protocol_tx = tx::create_protocol_tx(wasm_bytes, data_bytes, key);
-            fs::write_file(out, protocol_tx.try_to_vec()?);
-        }
         args::Commands::WriteTx(args::WriteTx {
             code,
             data,

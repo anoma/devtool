@@ -1,14 +1,12 @@
-use anoma::proto::{Signed, SignedTxData, Tx};
-use anoma::types::address::Address;
-use anoma::types::key::common::SecretKey;
-use anoma::types::key::RefTo;
-use anoma::types::storage::Epoch;
-use anoma::types::token::Amount;
-use anoma::types::transaction::protocol::ProtocolTxType;
-use anoma::types::transaction::{EncryptionKey, Fee, TxType, WrapperTx};
+use namada::proto::{Signed, SignedTxData, Tx};
+use namada::types::address::Address;
+use namada::types::key::common::SecretKey;
+use namada::types::storage::Epoch;
+use namada::types::token::Amount;
+use namada::types::transaction::protocol::ProtocolTxType;
+use namada::types::transaction::{EncryptionKey, Fee, TxType, WrapperTx};
 
 use borsh::de::BorshDeserialize;
-use borsh::BorshSerialize;
 
 pub fn read_tx(borsh_serialized_tx: &[u8]) -> eyre::Result<Tx> {
     let tx: Tx = Tx::try_from_slice(borsh_serialized_tx)?;
@@ -61,9 +59,8 @@ fn print_tx_data(data: Option<Vec<u8>>) {
                 println!("Data: (found TxType::Protocol)");
                 println!("Public key: {:#?}", protocol_tx.pk);
                 match protocol_tx.tx {
-                    ProtocolTxType::EthereumStateUpdate(tx) => {
-                        println!("Tx: (found ProtocolTxType::EthereumStateUpdate");
-                        print_tx(&tx);
+                    ProtocolTxType::EthereumEvents(_) => {
+                        println!("Tx: (found ProtocolTxType::EthereumEvents");
                     }
                     _ => println!("Tx: found ProtocolTxType"),
                 }
@@ -87,28 +84,6 @@ fn xan() -> Address {
         "atest1v4ehgw36x3prswzxggunzv6pxqmnvdj9xvcyzvpsggeyvs3cg9qnywf589qnwvfsg5erg3fkl09rg5",
     )
     .expect("The token address decoding shouldn't fail")
-}
-
-/// Create a protocol tx containing a Signed
-pub fn create_protocol_tx(wasm: Vec<u8>, unsigned_data: Option<Vec<u8>>, sk: SecretKey) -> Tx {
-    // we don't sign this inner tx as the VP wouldn't be able to verify the
-    // resulting SignedTxData::sig as that sig is calculated over the whole
-    // of `Tx { code, data, timestamp }`, but the VP only gets access to `data`
-    // instead we use a Signed struct in the `data` field which is a signature
-    // over just the `data` by itself
-    let signed_data: Option<Vec<u8>> = match unsigned_data {
-        None => None,
-        Some(data) => {
-            // try_to_vec() should never error?
-            let signed = Signed::new(&sk, data).try_to_vec().unwrap();
-            Some(signed)
-        }
-    };
-    let inner_tx = Tx::new(wasm, signed_data);
-
-    let protocol_tx_unsigned = ProtocolTxType::EthereumStateUpdate(inner_tx);
-    // this signature is checked by the ledger
-    protocol_tx_unsigned.sign(&sk.ref_to(), &sk)
 }
 
 /// Create a normal signed wrapped tx (i.e. a SignedTxData)

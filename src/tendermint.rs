@@ -1,10 +1,10 @@
-use anoma::proto::Tx;
-use anoma::tendermint::node::info::ListenAddress;
-use anoma_apps::client::tendermint_websocket_client::{
+use namada::proto::Tx;
+use namada::tendermint::node::info::ListenAddress;
+use namada_apps::client::tendermint_websocket_client::{
     TendermintWebsocketClient, WebSocketAddress,
 };
-use anoma_apps::tendermint_config_abci::net::Address as TendermintAddress;
-use anoma_apps::tendermint_rpc_abci::Client;
+use namada_apps::tendermint_config::net::Address as TendermintAddress;
+use namada_apps::tendermint_rpc::Client;
 use std::time::Duration;
 
 const RAW_RPC_ADDR: &str = "tcp://127.0.0.1:26657";
