@@ -16,6 +16,8 @@ ron = "0.7.0"
 
 hex = "0.4.3"
 
+hyper = { version = "0.14.20", features = ["full"] }
+
 eyre = "0.6.5"
 color-eyre = "0.5.10"
 
