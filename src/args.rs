@@ -12,10 +12,6 @@ pub(crate) struct Devtool {
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, Subcommand)]
 pub(crate) enum Commands {
-    #[clap(
-        about = "Borsh-serialize a Tx in the protocol transaction format (arbitrarily this is an EthereumStateUpdate protocol tx)"
-    )]
-    WriteProtocolTx(WriteTx),
     #[clap(about = "Borsh-serialize a Tx in the wrapper transaction format")]
     WriteTx(WriteTx),
     #[clap(about = "Read a Borsh-serialized Tx from a file and pretty print it")]

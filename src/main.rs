@@ -5,9 +5,9 @@ mod keys;
 mod tendermint;
 mod tx;
 
-use anoma_apps::logging;
 use clap::Parser;
 use color_eyre::eyre::Result;
+use namada_apps::logging;
 use tracing::level_filters::LevelFilter;
 
 #[tokio::main]
