@@ -2,13 +2,19 @@
 
 use borsh::BorshSerialize;
 use color_eyre::eyre::Result;
-use eyre::{eyre, Context, Report};
-use namada::types::key::common::{self, SecretKey};
+use namada::types::{
+    address,
+    ethereum_events::{EthAddress, EthereumEvent, TransferToNamada, Uint},
+    key::common::{self, SecretKey},
+};
 use std::{path::PathBuf, str::FromStr};
 
 // some of these tendermint dependencies may need to be declared as `pub extern` in anoma_apps
-use crate::{args, fs, keys, tendermint, tx};
-use namada_apps::tendermint_rpc::Client;
+use crate::{
+    args::{self, FakeTransferToNamada},
+    eth_bridge::send_fake_transfer_to_namada,
+    fs, keys, tendermint, tx,
+};
 
 fn deserialize_from_files(
     code: PathBuf,
@@ -62,6 +68,9 @@ pub(crate) async fn run(cmd: args::Commands) -> Result<()> {
             let (sk, _) = keys::random_keypair();
             let serialized = sk.try_to_vec()?;
             print!("{}", hex::encode(&serialized));
+        }
+        args::Commands::SubmitFakeTransferToNamada(fake_transfer_to_namada) => {
+            send_fake_transfer_to_namada(fake_transfer_to_namada).await?;
         }
     }
     Ok(())

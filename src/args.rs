@@ -1,5 +1,8 @@
 use clap::{Args, Parser, Subcommand};
+use namada::types::token::Amount;
 use std::path::PathBuf;
+
+use crate::eth_bridge::DAI_ERC20_ETH_ADDRESS_CHECKSUMMED;
 
 #[derive(Debug, Parser)]
 #[clap(name = "devtool")]
@@ -27,6 +30,8 @@ pub(crate) enum Commands {
     },
     #[clap(about = "Generate a random secret key and print the Borsh serialization")]
     PrintRandomKey,
+    #[clap(about = "Submit a fake transfer to Namada")]
+    SubmitFakeTransferToNamada(FakeTransferToNamada),
 }
 
 #[derive(Args, Debug)]
@@ -40,4 +45,25 @@ pub(crate) struct WriteTx {
     pub(crate) out: PathBuf,
     #[clap(long, parse(from_os_str))]
     pub(crate) key: PathBuf,
+}
+
+#[derive(Args, Debug)]
+#[clap(author, version, about, long_about = None)]
+pub(crate) struct FakeTransferToNamada {
+    #[clap(long, default_value_t = Amount::whole(100), value_parser)]
+    pub(crate) amount: Amount,
+    #[clap(
+        long,
+        default_value_t = String::from("atest1v4ehgw36xuunwd6989prwdfkxqmnvsfjxs6nvv6xxucrs3f3xcmns3fcxdzrvvz9xverzvzr56le8f"),
+        value_parser
+    )]
+    pub(crate) receiver: String,
+    #[clap(
+        long,
+        default_value_t = String::from(DAI_ERC20_ETH_ADDRESS_CHECKSUMMED),
+        value_parser
+    )]
+    pub(crate) asset: String,
+    #[clap(long)]
+    pub(crate) nonce: Option<u64>,
 }

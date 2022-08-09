@@ -1,5 +1,6 @@
 mod args;
 mod devtool;
+mod eth_bridge;
 mod fs;
 mod keys;
 mod tendermint;
