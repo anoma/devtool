@@ -1610,6 +1610,7 @@ dependencies = [
  "color-eyre",
  "eyre",
  "hex",
+ "hyper 0.14.20",
  "namada",
  "namada_apps",
  "rand 0.8.5",
