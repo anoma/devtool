@@ -26,8 +26,8 @@ tracing-log = "0.1.2"
 tracing-subscriber = {version = "0.3.7", features = ["env-filter"]}
 
 # b3de39edeb8181bd89f867f6a3a92af6cf9088f0 = branch james/ethbridge/experimental
-namada = {git = "https://github.com/anoma/namada.git", rev = "b3de39edeb8181bd89f867f6a3a92af6cf9088f0", features = ["testing"]}
-namada_apps = {git = "https://github.com/anoma/namada.git", rev = "b3de39edeb8181bd89f867f6a3a92af6cf9088f0"}
+namada = {git = "https://github.com/anoma/namada.git", branch = "james/ethbridge/experimental", features = ["testing"]}
+namada_apps = {git = "https://github.com/anoma/namada.git", branch = "james/ethbridge/experimental"}
 
 # this should be the same as the root workspace Cargo.toml [patch.crates-io] of the ledger repo
 [patch.crates-io]
