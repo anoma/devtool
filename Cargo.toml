@@ -25,9 +25,9 @@ tracing = "0.1.30"
 tracing-log = "0.1.2"
 tracing-subscriber = {version = "0.3.7", features = ["env-filter"]}
 
-# TODO - depending on james/experimental/eth-bridge-for-devtool so as to use TendermintWebsocketClient which has been exposed in that branch
-namada = {git = "https://github.com/anoma/namada.git", branch = "james/experimental/eth-bridge-for-devtool", default-features = false, features = ["ABCI-plus-plus", "testing"]}
-namada_apps = {git = "https://github.com/anoma/namada.git", branch = "james/experimental/eth-bridge-for-devtool", default-features = false, features = ["ABCI-plus-plus", "eth-fullnode"]}
+# b3de39edeb8181bd89f867f6a3a92af6cf9088f0 = branch james/ethbridge/experimental
+namada = {git = "https://github.com/anoma/namada.git", rev = "b3de39edeb8181bd89f867f6a3a92af6cf9088f0", features = ["testing"]}
+namada_apps = {git = "https://github.com/anoma/namada.git", rev = "b3de39edeb8181bd89f867f6a3a92af6cf9088f0"}
 
 # this should be the same as the root workspace Cargo.toml [patch.crates-io] of the ledger repo
 [patch.crates-io]
