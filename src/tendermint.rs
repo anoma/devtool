@@ -1,7 +1,7 @@
 use namada::proto::Tx;
 use namada::tendermint::node::info::ListenAddress;
+use namada_apps::facade::tendermint_config::net::Address as TendermintAddress;
 use namada_apps::facade::tendermint_rpc::{Client, WebSocketClient};
-use namada_apps::tendermint_config::net::Address as TendermintAddress;
 
 const RAW_RPC_ADDR: &str = "tcp://127.0.0.1:26657";
 

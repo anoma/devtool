@@ -10,7 +10,7 @@ use namada::types::{
 };
 use rand::Rng;
 
-pub const ETHEREUM_EVENT_ENDPOINT: &str = "http://127.0.0.1:3030/eth_events";
+pub const ETHEREUM_EVENT_ENDPOINT: &str = "http://0.0.0.0:3030/eth_events";
 
 pub const DAI_ERC20_ETH_ADDRESS_CHECKSUMMED: &str = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
 
