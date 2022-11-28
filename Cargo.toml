@@ -2,7 +2,7 @@
 name = "devtool"
 authors = ["Heliax AG <hello@heliax.dev>"]
 license = "GPL-3.0"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
 
 [dependencies]
@@ -25,12 +25,12 @@ tracing = "0.1.30"
 tracing-log = "0.1.2"
 tracing-subscriber = { version = "0.3.7", features = ["env-filter"] }
 
-namada_apps = { git = "https://github.com/anoma/namada.git?branch=eth-bridge-integration", rev = "fdd211a0d823a72884b5864ac84e2a83e986762e" }
-namada = { git = "https://github.com/anoma/namada.git?branch=eth-bridge-integration", rev = "fdd211a0d823a72884b5864ac84e2a83e986762e", features = [
+namada_apps = { git = "https://github.com/anoma/namada.git?branch=eth-bridge-integration", rev = "10e283f16a3c06a4999259c5ad1db0d78fa04788" }
+namada = { git = "https://github.com/anoma/namada.git?branch=eth-bridge-integration", rev = "10e283f16a3c06a4999259c5ad1db0d78fa04788", features = [
     "testing",
 ] }
 
-# this should be the same as the root workspace Cargo.toml [patch.crates-io] of the ledger repo
+# these patches should be a subset of the patches of the root workspace Cargo.toml (i.e. [patch.crates-io]) of the ledger repo
 [patch.crates-io]
 # TODO temp patch for <https://github.com/near/borsh-rs/issues/82>, <https://github.com/near/borsh-rs/issues/84> and more tba.
 borsh = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
@@ -51,7 +51,6 @@ tendermint = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6
 tendermint-config = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-proto = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-rpc = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
-tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-light-client-verifier = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 
 # patched to a commit on the `eth-bridge-integration` branch of our fork
@@ -60,3 +59,6 @@ ibc-proto = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c
 
 # patched to a commit on the `eth-bridge-integration` branch of our fork
 tower-abci = { git = "https://github.com/heliaxdev/tower-abci.git", rev = "fcc0014d0bda707109901abfa1b2f782d242f082" }
+
+# workaround to <https://github.com/ferrilab/bitvec/issues/199>
+funty = { git = "https://github.com/bitvecto-rs/funty/", rev = "7ef0d890fbcd8b3def1635ac1a877fc298488446" }

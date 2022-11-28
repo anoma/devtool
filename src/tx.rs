@@ -59,8 +59,8 @@ fn print_tx_data(data: Option<Vec<u8>>) {
                 println!("Data: (found TxType::Protocol)");
                 println!("Public key: {:#?}", protocol_tx.pk);
                 match protocol_tx.tx {
-                    ProtocolTxType::EthereumEvents(_) => {
-                        println!("Tx: (found ProtocolTxType::EthereumEvents");
+                    ProtocolTxType::EthEventsVext(_) => {
+                        println!("Tx: (found ProtocolTxType::EthEventsVext");
                     }
                     _ => println!("Tx: found ProtocolTxType"),
                 }
