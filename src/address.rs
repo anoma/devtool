@@ -1,7 +1,7 @@
 use namada::types::address::{Address, EstablishedAddressGen};
 use rand::Rng;
 
-pub fn generate_random() -> Address {
+pub fn generate_established() -> Address {
     let mut rng = rand::thread_rng();
     let seed: [u8; 32] = rng.gen();
     let seed = String::from_utf8_lossy(&seed);

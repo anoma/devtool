@@ -72,8 +72,8 @@ pub(crate) async fn run(cmd: args::Commands) -> Result<()> {
         args::Commands::SubmitFakeTransferToNamada(fake_transfer_to_namada) => {
             send_fake_transfer_to_namada(fake_transfer_to_namada).await?;
         }
-        args::Commands::PrintRandomAddress => {
-            let addr = crate::address::generate_random();
+        args::Commands::GenerateEstablishedAddress => {
+            let addr = crate::address::generate_established();
             print!("{}", addr);
         }
     }
