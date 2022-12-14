@@ -1,3 +1,4 @@
+mod address;
 mod args;
 mod devtool;
 mod eth_bridge;

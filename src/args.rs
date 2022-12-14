@@ -30,6 +30,8 @@ pub(crate) enum Commands {
     },
     #[clap(about = "Generate a random secret key and print the Borsh serialization")]
     PrintRandomKey,
+    #[clap(about = "Generate a random Namada bech32m address and print it to stdout")]
+    PrintRandomAddress,
     #[clap(about = "Submit a fake transfer to Namada")]
     SubmitFakeTransferToNamada(FakeTransferToNamada),
 }
