@@ -76,6 +76,10 @@ pub(crate) async fn run(cmd: args::Commands) -> Result<()> {
             let addr = crate::address::generate_established();
             print!("{}", addr);
         }
+        args::Commands::GenerateImplicitAddress => {
+            let addr = crate::address::generate_implicit();
+            print!("{}", addr);
+        }
     }
     Ok(())
 }

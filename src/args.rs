@@ -32,6 +32,8 @@ pub(crate) enum Commands {
     PrintRandomKey,
     #[clap(about = "Generate a random established address and print the bech32m to stdout")]
     GenerateEstablishedAddress,
+    #[clap(about = "Generate a random implicit address and print the bech32m to stdout")]
+    GenerateImplicitAddress,
     #[clap(about = "Submit a fake transfer to Namada")]
     SubmitFakeTransferToNamada(FakeTransferToNamada),
 }
